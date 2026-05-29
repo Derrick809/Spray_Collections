@@ -109,6 +109,7 @@ const AdminDashboard = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
               className="w-full border border-slate-200 rounded-sm px-4 py-3 mb-4 text-sm focus:outline-none focus:border-[#D4AF37]"
               placeholder="Enter manager password"
             />

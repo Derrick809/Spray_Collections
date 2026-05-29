@@ -12,10 +12,13 @@ const Navbar = ({ onOpenCart }) => {
   return (
     <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#D4AF37] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          <Link to="/" className="text-2xl font-serif tracking-widest text-black group">
-            CIANELLE_LUXE
-            <span className="block text-[9px] font-sans tracking-[0.3em] text-center text-gray-500 group-hover:text-[#D4AF37] transition-colors">FRAGRANCES</span>
+        <div className="flex justify-between h-16 sm:h-20 items-center">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+            <img src="/cianelle.svg.jpeg" alt="Cianelle Luxe Logo" className="h-12 w-12 sm:h-16 sm:w-16 object-contain" />
+            <div className="text-lg sm:text-2xl font-serif tracking-widest text-black hidden sm:block">
+              CIANELLE_LUXE
+              <span className="block text-[7px] sm:text-[9px] font-sans tracking-[0.3em] text-center text-gray-500 group-hover:text-[#D4AF37] transition-colors">FRAGRANCES</span>
+            </div>
           </Link>
 
           <div className="hidden md:flex space-x-8 font-sans text-sm tracking-wider uppercase font-medium items-center">

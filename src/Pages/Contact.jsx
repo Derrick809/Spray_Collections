@@ -12,16 +12,37 @@ const Contact = () => (
         <div className="rounded-[32px] bg-white p-10 shadow-xl shadow-slate-900/5 border border-slate-200">
           <div className="space-y-6 text-slate-700">
             <div>
-              <h2 className="text-base font-semibold text-slate-950">WhatsApp</h2>
-              <p className="text-sm">0247283407</p>
+              <h2 className="text-base font-semibold text-slate-950 mb-2">WhatsApp</h2>
+              <a 
+                href="https://wa.me/233247283407" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-amber-600 hover:text-amber-700 hover:underline font-semibold transition"
+              >
+                0247283407 (Click to call/message)
+              </a>
             </div>
             <div>
-              <h2 className="text-base font-semibold text-slate-950">Instagram</h2>
-              <p className="text-sm">@Sheis_cianelle</p>
+              <h2 className="text-base font-semibold text-slate-950 mb-2">Instagram</h2>
+              <a 
+                href="https://instagram.com/Sheis_cianelle" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-amber-600 hover:text-amber-700 hover:underline font-semibold transition"
+              >
+                @Sheis_cianelle (Click to visit)
+              </a>
             </div>
             <div>
-              <h2 className="text-base font-semibold text-slate-950">Snapchat</h2>
-              <p className="text-sm">christel_dior</p>
+              <h2 className="text-base font-semibold text-slate-950 mb-2">Snapchat</h2>
+              <a 
+                href="https://snapchat.com/add/christel_dior" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-amber-600 hover:text-amber-700 hover:underline font-semibold transition"
+              >
+                christel_dior (Click to add)
+              </a>
             </div>
             <div>
               <h2 className="text-base font-semibold text-slate-950">Location</h2>

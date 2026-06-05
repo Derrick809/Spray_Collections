@@ -11,6 +11,8 @@ import Menu from './Pages/Menu';
 import Contact from './Pages/Contact';
 import CategoryPage from './Pages/CategoryPage';
 import AdminDashboard from './Pages/AdminDashboard';
+import Checkout from './Pages/Checkout';
+import UserDashboard from './Pages/UserDashboard';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -40,6 +42,8 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/categories/:category" element={<CategoryPage />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </div>

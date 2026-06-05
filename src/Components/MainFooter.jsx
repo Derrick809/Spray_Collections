@@ -11,9 +11,18 @@ const MainFooter = () => (
       <div>
         <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Connect with Us</h3>
         <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
-          <li className="flex items-center gap-3"><FiPhone className="w-4 h-4 text-amber-300 flex-shrink-0" /> WhatsApp: <span className="text-white">0247283407</span></li>
-          <li className="flex items-center gap-3"><FiInstagram className="w-4 h-4 text-amber-300 flex-shrink-0" /> Instagram: <span className="text-white">Sheis_cianelle</span></li>
-          <li className="flex items-center gap-3"><FiGlobe className="w-4 h-4 text-amber-300 flex-shrink-0" /> Snapchat: <span className="text-white">christel_dior</span></li>
+          <li className="flex items-center gap-3">
+            <FiPhone className="w-4 h-4 text-amber-300 flex-shrink-0" />
+            WhatsApp: <a href="https://wa.me/233247283407" target="_blank" rel="noreferrer" className="text-white hover:text-amber-300">0247283407</a>
+          </li>
+          <li className="flex items-center gap-3">
+            <FiInstagram className="w-4 h-4 text-amber-300 flex-shrink-0" />
+            Instagram: <a href="https://instagram.com/Sheis_cianelle" target="_blank" rel="noreferrer" className="text-white hover:text-amber-300">Sheis_cianelle</a>
+          </li>
+          <li className="flex items-center gap-3">
+            <FiGlobe className="w-4 h-4 text-amber-300 flex-shrink-0" />
+            Snapchat: <a href="https://www.snapchat.com/add/christel_dior" target="_blank" rel="noreferrer" className="text-white hover:text-amber-300">christel_dior</a>
+          </li>
         </ul>
       </div>
       <div className="sm:col-span-2 md:col-span-1">

@@ -164,11 +164,11 @@ const AdminDashboard = () => {
                     </div>
                     <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                       <p className="text-sm uppercase tracking-[0.35em] text-slate-500">Company</p>
-                      <p className="mt-4 text-3xl font-serif font-semibold text-slate-950">{companyInfo.name}</p>
+                      <p className="mt-4 text-base sm:text-2xl font-serif font-semibold text-slate-950 whitespace-normal break-words">{companyInfo.name}</p>
                     </div>
                     <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                       <p className="text-sm uppercase tracking-[0.35em] text-slate-500">Location</p>
-                      <p className="mt-4 text-3xl font-serif font-semibold text-slate-950">{companyInfo.address}</p>
+                      <p className="mt-4 text-base sm:text-2xl font-serif font-semibold text-slate-950 whitespace-normal break-words">{companyInfo.address}</p>
                     </div>
                   </div>
                 </div>

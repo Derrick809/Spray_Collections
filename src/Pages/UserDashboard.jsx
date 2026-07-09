@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { FiSearch, FiList, FiClock } from 'react-icons/fi';
 
 const UserDashboard = () => {
-  const { orderHistory } = useCart();
+  const { orderHistory, clearOrderHistory } = useCart();
   const [showHistory, setShowHistory] = useState(true);
   const [trackName, setTrackName] = useState('');
   const [trackId, setTrackId] = useState('');
@@ -35,23 +35,21 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 rounded-[32px] border border-gray-200 bg-white p-8 shadow-sm">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="min-h-screen bg-slate-50 py-12 sm:py-16">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="mb-10 rounded-2xl sm:rounded-[32px] border border-gray-200 bg-white p-4 sm:p-8 shadow-sm">
+          <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-amber-400">User Dashboard</p>
-              <h1 className="text-3xl sm:text-4xl font-serif font-semibold text-slate-950">Track your orders and review purchase history</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-semibold text-slate-950">Track your orders and review purchase history</h1>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button onClick={() => setShowHistory(!showHistory)} className="inline-flex items-center gap-2 rounded-sm border border-slate-200 bg-slate-100 px-5 py-3 text-xs uppercase tracking-[0.2em] font-bold text-slate-700 hover:bg-slate-200 transition">
-                <FiList className="w-4 h-4" /> {showHistory ? 'Hide History' : 'Show History'}
-              </button>
-            </div>
+            <button onClick={() => setShowHistory(!showHistory)} className="inline-flex items-center justify-center gap-2 rounded-sm border border-slate-200 bg-slate-100 px-4 sm:px-5 py-3 text-xs uppercase tracking-[0.2em] font-bold text-slate-700 hover:bg-slate-200 transition min-h-[44px]">
+              <FiList className="w-4 h-4" /> {showHistory ? 'Hide History' : 'Show History'}
+            </button>
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-6">
             <div className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between mb-6 gap-4">
@@ -104,37 +102,44 @@ const UserDashboard = () => {
                 {orderHistory.length === 0 ? (
                   <p className="text-sm text-slate-500">No completed orders are available yet.</p>
                 ) : (
-                  <div className="space-y-4">
-                    {orderHistory.map((order) => (
-                      <div key={order.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
-                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                          <div>
-                            <p className="text-xs uppercase tracking-[0.3em] text-amber-400">Order ID</p>
-                            <p className="text-lg font-semibold text-slate-950">{order.id}</p>
-                          </div>
-                          <div className="space-y-1 text-sm text-slate-600">
-                            <p><span className="font-semibold text-slate-950">Status:</span> {order.status}</p>
-                            <p><span className="font-semibold text-slate-950">Date:</span> {order.date}</p>
-                            <p><span className="font-semibold text-slate-950">Total:</span> ₵{order.total.toFixed(2)}</p>
-                          </div>
-                        </div>
-                        <div className="mt-4 border-t border-slate-200 pt-4 space-y-3">
-                          {order.items.map((item) => (
-                            <div key={item.id} className="grid gap-2 sm:grid-cols-[1.2fr_0.8fr] items-center rounded-2xl bg-white p-3 border border-slate-200">
-                              <div>
-                                <p className="text-sm font-semibold text-slate-950">{item.name}</p>
-                                <p className="text-xs text-slate-500 mt-1">Item ID: {item.id}</p>
-                              </div>
-                              <div className="text-sm text-slate-600">
-                                <p>Qty: {item.qty}</p>
-                                <p className="mt-1">₵{(item.price * item.qty).toFixed(2)}</p>
-                              </div>
+                  <>
+                    <div className="space-y-4">
+                      {orderHistory.map((order) => (
+                        <div key={order.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+                          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                              <p className="text-xs uppercase tracking-[0.3em] text-amber-400">Order ID</p>
+                              <p className="text-lg font-semibold text-slate-950">{order.id}</p>
                             </div>
-                          ))}
+                            <div className="space-y-1 text-sm text-slate-600">
+                              <p><span className="font-semibold text-slate-950">Status:</span> {order.status}</p>
+                              <p><span className="font-semibold text-slate-950">Date:</span> {order.date}</p>
+                              <p><span className="font-semibold text-slate-950">Total:</span> ₵{order.total.toFixed(2)}</p>
+                            </div>
+                          </div>
+                          <div className="mt-4 border-t border-slate-200 pt-4 space-y-3">
+                            {order.items.map((item) => (
+                              <div key={item.id} className="grid gap-2 sm:grid-cols-[1.2fr_0.8fr] items-center rounded-2xl bg-white p-3 border border-slate-200">
+                                <div>
+                                  <p className="text-sm font-semibold text-slate-950">{item.name}</p>
+                                  <p className="text-xs text-slate-500 mt-1">Item ID: {item.id}</p>
+                                </div>
+                                <div className="text-sm text-slate-600">
+                                  <p>Qty: {item.qty}</p>
+                                  <p className="mt-1">₵{(item.price * item.qty).toFixed(2)}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 flex justify-end">
+                      <button onClick={clearOrderHistory} className="rounded-full bg-red-500 px-6 py-3 text-xs uppercase tracking-[0.2em] font-bold text-white hover:bg-red-600 transition">
+                        Clear History
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             )}

@@ -6,11 +6,11 @@ import MainFooter from '../Components/MainFooter';
 
 
 const Home = () => (
-  <div className="bg-[#fcfcfc] text-slate-950">
+  <div className="bg-[#f3f4f6] text-slate-950">
     <HeroCarousel />
     <CategoryHighlights />
     <FeaturedProducts />
-    <section className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:px-8">
+    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-amber-400">Why choose Cianelle_Luxe</p>
@@ -31,7 +31,7 @@ const Home = () => (
             </li>
           </ul>
         </div>
-        <div className="rounded-[32px] border border-slate-200 bg-white p-6 sm:p-8 shadow-xl shadow-slate-900/5">
+        <div className="rounded-2xl sm:rounded-[32px] border border-slate-200 bg-white p-6 sm:p-8 lg:p-10 shadow-lg shadow-slate-900/5">
           <h3 className="text-lg sm:text-xl font-serif font-semibold text-slate-950">Landing Page Highlights</h3>
           <div className="mt-6 space-y-4 text-slate-600 text-sm">
             <div>

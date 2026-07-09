@@ -4,8 +4,58 @@
   color-scheme: light;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  min-width: 320px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  tap-highlight-color: transparent;
+}
+
+/* Mobile-friendly touch targets */
+button,
+a,
+input,
+textarea,
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Prevent zoom on input focus for iOS */
+@supports (-webkit-touch-callout: none) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 body {
@@ -16,6 +66,11 @@ body {
 button,
 a {
   @apply transition duration-200 ease-in-out;
+}
+
+/* Better mobile scrolling */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
 }
 
 .carousel-control-prev-icon,

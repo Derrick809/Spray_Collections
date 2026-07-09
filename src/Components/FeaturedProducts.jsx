@@ -1,10 +1,11 @@
 ﻿import React from 'react';
-import { featuredProducts } from '../data/productData';
+import { featuredProducts as staticFeaturedProducts } from '../data/productData';
 import { useCart } from '../context/CartContext';
 import ProductCard from './ProductCard';
 
 const FeaturedProducts = () => {
-  const { addToCart } = useCart();
+  const { addToCart, products: contextProducts } = useCart();
+  const featuredProducts = contextProducts.length ? contextProducts.slice(0, 12) : staticFeaturedProducts;
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:px-8">

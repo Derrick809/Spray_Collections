@@ -13,7 +13,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
       {isOpen && (
         <>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 bg-black z-50" />
-          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween', duration: 0.3 }} className="fixed right-0 top-0 h-full w-full sm:w-[450px] bg-white z-50 shadow-2xl flex flex-col p-6">
+          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween', duration: 0.3 }} className="fixed right-0 top-0 h-full w-full sm:w-[420px] lg:w-[450px] bg-white z-50 shadow-2xl flex flex-col p-4 sm:p-6">
             <>
               <div className="flex justify-between items-center border-b border-gray-100 pb-4 mb-6">
                 <h2 className="text-xl font-serif text-black font-semibold">Your Cart <span className="text-sm font-sans font-normal text-gray-500">({cartItems.length} items)</span></h2>

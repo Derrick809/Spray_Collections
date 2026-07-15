@@ -2,6 +2,7 @@
 import { FiGrid, FiSliders, FiPlusSquare, FiShoppingBag, FiSettings } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import { categoryFolders } from '../data/productData';
+import { fileToDataUrl } from '../utils/imageUtils';
 
 const AdminDashboard = () => {
   const [password, setPassword] = useState('');
@@ -109,18 +110,17 @@ const AdminDashboard = () => {
     setNewItem((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleUpload = (event) => {
+  const handleUpload = async (event) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const preview = URL.createObjectURL(file);
-      setNewItem((prev) => ({ ...prev, image: file, preview }));
+    if (!file) {
+      return;
     }
+
+    const preview = await fileToDataUrl(file);
+    setNewItem((prev) => ({ ...prev, image: file, preview }));
   };
 
   const clearNewItem = () => {
-    if (newItem.preview) {
-      URL.revokeObjectURL(newItem.preview);
-    }
     setNewItem({ name: '', price: '', category: categoryFolders[0].name, description: '', image: null, preview: null });
   };
 
@@ -261,6 +261,7 @@ const AdminDashboard = () => {
                       <thead>
                         <tr className="text-left text-xs uppercase tracking-[0.3em] text-slate-500">
                           <th className="px-4 py-3">Product</th>
+                          <th className="px-4 py-3">Image</th>
                           <th className="px-4 py-3">Category</th>
                           <th className="px-4 py-3">Price</th>
                           <th className="px-4 py-3">Availability</th>
@@ -273,6 +274,13 @@ const AdminDashboard = () => {
                             <td className="px-4 py-4 align-top">
                               <div className="font-semibold text-slate-950">{product.name}</div>
                               <div className="text-xs text-slate-500">{product.description}</div>
+                            </td>
+                            <td className="px-4 py-4 align-top">
+                              {product.image ? (
+                                <img src={product.image} alt={product.name} className="h-16 w-16 rounded-xl object-cover border border-slate-200" />
+                              ) : (
+                                <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-dashed border-slate-300 text-[10px] text-slate-400">No image</div>
+                              )}
                             </td>
                             <td className="px-4 py-4 align-top">
                               <select

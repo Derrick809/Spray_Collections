@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { products as initialProducts } from '../data/productData';
+import { findUserByCredentials, normalizeEmail, normalizePassword, normalizeUsers } from './authUtils';
+import { mergeProductsWithDefaults } from '../utils/productCatalog';
 
 const CartContext = createContext(null);
 
@@ -12,45 +14,20 @@ const loadStoredItems = (key, fallback = []) => {
   }
 };
 
-const normalizeEmail = (value) => (value || '').trim().toLowerCase();
-const normalizePassword = (value) => (value || '').trim();
-
-const normalizeUsers = (users) => {
-  if (!Array.isArray(users)) {
-    return [];
-  }
-
-  return users.map((user) => ({
-    ...user,
-    email: normalizeEmail(user.email),
-    password: normalizePassword(user.password),
-    firstName: (user.firstName || '').trim(),
-    middleName: (user.middleName || '').trim(),
-    lastName: (user.lastName || '').trim(),
-    country: (user.country || '').trim(),
-    address: (user.address || '').trim(),
-    phone: (user.phone || '').trim(),
-  }));
-};
-
 const hydrateStoredProducts = (storedProducts, initialProducts) => {
   if (!Array.isArray(storedProducts) || !storedProducts.length) {
     return initialProducts;
   }
 
   const initialMap = new Map(initialProducts.map((item) => [item.id, item]));
-  const allIdsMatch = storedProducts.every((stored) => initialMap.has(stored.id));
-
-  if (!allIdsMatch) {
-    return initialProducts;
-  }
 
   return storedProducts.map((stored) => {
     const initial = initialMap.get(stored.id);
     return {
-      ...initial,
+      ...(initial || {}),
       ...stored,
-      image: initial.image,
+      id: stored.id || initial?.id,
+      image: stored.image || initial?.image,
     };
   });
 };
@@ -58,7 +35,7 @@ const hydrateStoredProducts = (storedProducts, initialProducts) => {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => loadStoredItems('cartItems'));
   const [orderHistory, setOrderHistory] = useState(() => loadStoredItems('orderHistory'));
-  const [products, setProducts] = useState(() => hydrateStoredProducts(loadStoredItems('products', initialProducts), initialProducts));
+  const [products, setProducts] = useState(() => hydrateStoredProducts(mergeProductsWithDefaults(loadStoredItems('products', initialProducts), initialProducts), initialProducts));
   const [currentUser, setCurrentUser] = useState(() => {
     const storedUser = loadStoredItems('currentUser', null);
     if (!storedUser) {
@@ -92,6 +69,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('users', JSON.stringify(users));
   }, [users]);
+
 
   const addToCart = (product) => {
     setCartItems((items) => {
@@ -154,8 +132,8 @@ export const CartProvider = ({ children }) => {
     }
 
     const normalizedUsers = normalizeUsers(users);
-    const existingUser = normalizedUsers.find((user) => user.email === emailLower);
-    if (!existingUser || existingUser.password !== trimmedPassword) {
+    const existingUser = findUserByCredentials(normalizedUsers, emailLower, trimmedPassword);
+    if (!existingUser) {
       return { success: false, message: 'Invalid email or password.' };
     }
 

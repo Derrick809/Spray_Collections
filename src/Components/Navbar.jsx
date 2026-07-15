@@ -13,21 +13,21 @@ const Navbar = ({ onOpenCart }) => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState('signin');
   const { totalItems, currentUser } = useCart();
-  const navLinkClass = 'flex items-center h-10 text-black hover:text-[#D4AF37] transition leading-none whitespace-nowrap';
-  const navButtonClass = 'flex items-center h-10 gap-1 text-black hover:text-[#D4AF37] focus:outline-none transition leading-none whitespace-nowrap';
+  const navLinkClass = 'flex items-center justify-center h-10 px-2 lg:px-3 text-black hover:text-[#D4AF37] transition leading-none whitespace-nowrap font-medium tracking-[0.2em] uppercase text-[11px] lg:text-xs';
+  const navButtonClass = 'flex items-center justify-center h-10 px-2 lg:px-3 gap-1 text-black hover:text-[#D4AF37] focus:outline-none transition leading-none whitespace-nowrap font-medium tracking-[0.2em] uppercase text-[11px] lg:text-xs';
 
   return (
     <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#D4AF37] shadow-sm ">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center gap-4 sm:gap-8">
+        <div className="flex h-16 items-center justify-between gap-3 sm:gap-6">
           <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group flex-shrink-0">
-            <img src="/cianelle.svg.jpeg" alt="Cianelle Luxe Logo" className="h-12 w-12 object-contain" />
-            <div className="hidden sm:block text-sm sm:text-base font-serif tracking-widest text-black whitespace-nowrap">
+            <img src="/cianelle.svg.jpeg" alt="Cianelle Luxe Logo" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+            <div className="hidden sm:block text-sm sm:text-base font-serif tracking-[0.25em] text-black whitespace-nowrap">
               CIANELLE_LUXE
             </div>
           </Link>
 
-          <div className="hidden md:flex space-x-3 lg:space-x-5 font-sans text-xs lg:text-sm tracking-wider uppercase font-medium items-center flex-shrink-0">
+          <div className="hidden md:flex flex-1 items-center justify-end gap-1 lg:gap-2 font-sans">
             <Link to="/" className={navLinkClass}>Home</Link>
             <Link to="/about" className={navLinkClass}>About</Link>
             <Link to="/menu" className={navLinkClass}>Menu</Link>

@@ -191,6 +191,7 @@ export const CartProvider = ({ children }) => {
     seedInitialData();
   }, [isAdmin, seedStatus]);
 
+
   const addToCart = (product) => {
     setCartItems((items) => {
       const itemId = product.id || `item-${Date.now()}`;

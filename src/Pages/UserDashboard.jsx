@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { FiSearch, FiList, FiClock } from 'react-icons/fi';
 
 const UserDashboard = () => {
-  const { orderHistory, clearOrderHistory } = useCart();
+  const { orderHistory, currentUser, authReady } = useCart();
   const [showHistory, setShowHistory] = useState(true);
   const [trackName, setTrackName] = useState('');
   const [trackId, setTrackId] = useState('');
@@ -37,6 +37,11 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen bg-slate-50 py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+        {authReady && !currentUser && (
+          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">
+            Sign in to load your Firebase order history.
+          </div>
+        )}
         <div className="mb-10 rounded-2xl sm:rounded-[32px] border border-gray-200 bg-white p-4 sm:p-8 shadow-sm">
           <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between">
             <div>
@@ -57,7 +62,7 @@ const UserDashboard = () => {
                   <h2 className="text-xl font-serif font-semibold text-slate-950">Track Item</h2>
                   <p className="text-sm text-slate-500 mt-2">Enter the item name and order ID to check delivery status.</p>
                 </div>
-                <div className="rounded-full bg-amber-100 text-amber-800 px-4 py-2 text-xs uppercase tracking-[0.25em]">{orderedCount} completed orders</div>
+                <div className="rounded-full bg-amber-100 text-amber-800 px-4 py-2 text-xs uppercase tracking-[0.25em]">{orderedCount} orders</div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block text-sm text-slate-600">
@@ -100,7 +105,7 @@ const UserDashboard = () => {
                   </div>
                 </div>
                 {orderHistory.length === 0 ? (
-                  <p className="text-sm text-slate-500">No completed orders are available yet.</p>
+                  <p className="text-sm text-slate-500">No orders are available yet.</p>
                 ) : (
                   <>
                     <div className="space-y-4">
@@ -131,13 +136,20 @@ const UserDashboard = () => {
                               </div>
                             ))}
                           </div>
+                          {order.statusHistory?.length > 0 && (
+                            <div className="mt-4 border-t border-slate-200 pt-4">
+                              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Status history</p>
+                              <div className="flex flex-wrap gap-2">
+                                {order.statusHistory.map((entry, index) => (
+                                  <span key={`${entry.status}-${index}`} className="rounded-full bg-white px-3 py-1 text-xs text-slate-600 ring-1 ring-slate-200">
+                                    {entry.status}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
-                    </div>
-                    <div className="mt-6 flex justify-end">
-                      <button onClick={clearOrderHistory} className="rounded-full bg-red-500 px-6 py-3 text-xs uppercase tracking-[0.2em] font-bold text-white hover:bg-red-600 transition">
-                        Clear History
-                      </button>
                     </div>
                   </>
                 )}

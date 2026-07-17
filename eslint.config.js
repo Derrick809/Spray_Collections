@@ -17,5 +17,20 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^React$' }],
+    },
+  },
+  {
+    files: ['src/Pages/AdminDashboard.jsx'],
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(React|useEffect)$' }],
+    },
+  },
+  {
+    files: ['api/**/*.js', 'server/**/*.js'],
+    languageOptions: {
+      globals: globals.node,
+    },
   },
 ])
